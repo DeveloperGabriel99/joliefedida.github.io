@@ -1,110 +1,204 @@
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fonte mais divertida */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Ocupa a altura total da tela */
+    min-height: 100vh;
     margin: 0;
-    background-color: #fce4ec; /* Rosa bem clarinho */
-    color: #333; /* Texto escuro */
+    background-color: #fce4ec;
+    color: #333;
+    overflow: hidden;
+    position: relative;
+    cursor: none;
+}
+
+.background-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ffdde1, #ee9ca7, #ffdde1);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite alternate;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
     text-align: center;
-    padding: 30px; /* Aumentei um pouco o padding */
+    padding: 30px;
     background-color: #fff;
-    border-radius: 20px; /* Arredondamento um pouco maior */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra mais suave e um pouco maior */
-    max-width: 95%; /* Aumentei a largura máxima */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    max-width: 95%;
     margin: 20px auto;
+    position: relative;
+    z-index: 2; /* Garante que o container esteja acima da chuva */
 }
 
-/* Estilo e Animação do Título */
 .animated-title {
-    color: #e91e63; /* Rosa vibrante para o título */
-    font-size: 4em; /* Título um pouco maior */
+    color: #e91e63;
+    font-size: 4em;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 40px;
-    animation: pulse 1.5s infinite alternate; /* Animação de "pulso" */
+    animation: pulse 1.5s infinite alternate;
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.05);
-    }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
 }
 
-/* Estilos da Galeria de Imagens */
 .gallery {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px; /* Aumentei o espaço entre as imagens */
+    gap: 25px;
     margin-bottom: 40px;
 }
 
-/* Estilo e Animação das Imagens */
 .gallery img.animated-image {
-    width: 200px; /* Diminuí um pouco o tamanho inicial */
+    width: 200px;
     height: 200px;
     object-fit: cover;
     border: 7px dashed #ff80ab;
-    border-radius: 50%; /* Deixa as fotos redondas */
+    border-radius: 50%;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out; /* Transição suave para o hover */
-    animation: spin 2s linear infinite alternate; /* Animação de "girar" suave */
+    transition: transform 0.3s ease-in-out;
+    animation: spin 2s linear infinite alternate;
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg) scale(1);
-    }
-    to {
-        transform: rotate(5deg) scale(1.03);
-    }
+    from { transform: rotate(0deg) scale(1); }
+    to { transform: rotate(5deg) scale(1.03); }
 }
 
 .gallery img.animated-image:hover {
-    transform: scale(1.1) rotate(10deg); /* Efeito mais pronunciado no hover */
+    transform: scale(1.1) rotate(10deg);
 }
 
-/* Estilo e Animação do Texto Abaixo das Fotos */
 .animated-text {
-    font-size: 1.8em; /* Texto um pouco maior */
-    color: #6a1b9a; /* Roxo divertido */
+    font-size: 1.8em;
+    color: #6a1b9a;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-    animation: fadeInUp 1s ease-out forwards; /* Animação de "aparecer de baixo" */
-    opacity: 0; /* Começa invisível para a animação */
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .animated-title { font-size: 2.5em; }
+    .gallery img.animated-image { width: 150px; height: 150px; }
+    .animated-text { font-size: 1.2em; }
+}
+
+/* --- ESTILOS PARA OS EFEITOS ESPECÍFICOS --- */
+
+/* Avião Passando (AJUSTADO PARA VIRAR) */
+.flying-plane {
+    position: absolute;
+    top: 10%;
+    left: -200px;
+    width: 150px;
+    height: auto;
+    z-index: 5;
+    animation: flyAcross 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes flyAcross {
+    0% {
+        left: -200px;
+        transform: rotate(0deg) scaleX(1);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    49.9% {
+        transform: rotate(5deg) scaleX(1);
+    }
+    50% {
+        left: calc(100% + 200px);
+        transform: rotate(5deg) scaleX(-1);
+    }
+    99.9% {
+        transform: rotate(0deg) scaleX(-1);
+    }
+    100% {
+        left: -200px;
+        transform: rotate(0deg) scaleX(1);
+        display: block;
     }
 }
 
-/* Responsividade básica para telas menores */
-@media (max-width: 600px) {
-    .animated-title {
-        font-size: 2.5em; /* Título menor em telas pequenas */
-    }
 
-    .gallery img.animated-image {
-        width: 150px;
-        height: 150px;
-    }
+/* Efeito de Faísca/Raio no Mouse */
+.mouse-spark {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ffeb3b, #ff9800);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    opacity: 0.8;
+    box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ff9800, 0 0 30px #ff5722;
+    transition: width 0.1s ease-out, height 0.1s ease-out, opacity 0.1s ease-out;
+}
 
-    .animated-text {
-        font-size: 1.2em; /* Texto menor em telas pequenas */
+/* Fogos de Artifício (partículas) */
+.firework-particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    animation: fireworkExplode 1s ease-out forwards;
+}
+
+@keyframes fireworkExplode {
+    0% { opacity: 1; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(1.5) translate(var(--x-offset), var(--y-offset)); }
+}
+
+/* --- ESTILOS PARA CHUVA (MAIS VISÍVEL E BONITA) --- */
+.rain-drop {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(173, 216, 230, 1), rgba(120, 180, 250, 0.8)); /* Cor mais sólida e opaca */
+    width: 3px; /* Mais larga */
+    height: 40px; /* Mais comprida */
+    border-radius: 1.5px;
+    pointer-events: none;
+    z-index: 0; /* Continua no fundo, mas acima do background */
+    opacity: 0; /* A opacidade será controlada pelo JS */
+    animation: fall linear infinite; /* A animação 'fall' do CSS ainda é importante */
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9; /* Fica bem visível rapidamente */
+    }
+    90% {
+        opacity: 0.9;
+    }
+    to {
+        transform: translateY(100vh);
+        opacity: 0; /* Desaparece para reiniciar, mas de forma rápida */
     }
 }
