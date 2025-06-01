@@ -1,0 +1,110 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fonte mais divertida */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ocupa a altura total da tela */
+    margin: 0;
+    background-color: #fce4ec; /* Rosa bem clarinho */
+    color: #333; /* Texto escuro */
+}
+
+.container {
+    text-align: center;
+    padding: 30px; /* Aumentei um pouco o padding */
+    background-color: #fff;
+    border-radius: 20px; /* Arredondamento um pouco maior */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra mais suave e um pouco maior */
+    max-width: 95%; /* Aumentei a largura máxima */
+    margin: 20px auto;
+}
+
+/* Estilo e Animação do Título */
+.animated-title {
+    color: #e91e63; /* Rosa vibrante para o título */
+    font-size: 4em; /* Título um pouco maior */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    animation: pulse 1.5s infinite alternate; /* Animação de "pulso" */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Estilos da Galeria de Imagens */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px; /* Aumentei o espaço entre as imagens */
+    margin-bottom: 40px;
+}
+
+/* Estilo e Animação das Imagens */
+.gallery img.animated-image {
+    width: 200px; /* Diminuí um pouco o tamanho inicial */
+    height: 200px;
+    object-fit: cover;
+    border: 7px dashed #ff80ab;
+    border-radius: 50%; /* Deixa as fotos redondas */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out; /* Transição suave para o hover */
+    animation: spin 2s linear infinite alternate; /* Animação de "girar" suave */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+    to {
+        transform: rotate(5deg) scale(1.03);
+    }
+}
+
+.gallery img.animated-image:hover {
+    transform: scale(1.1) rotate(10deg); /* Efeito mais pronunciado no hover */
+}
+
+/* Estilo e Animação do Texto Abaixo das Fotos */
+.animated-text {
+    font-size: 1.8em; /* Texto um pouco maior */
+    color: #6a1b9a; /* Roxo divertido */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    animation: fadeInUp 1s ease-out forwards; /* Animação de "aparecer de baixo" */
+    opacity: 0; /* Começa invisível para a animação */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 600px) {
+    .animated-title {
+        font-size: 2.5em; /* Título menor em telas pequenas */
+    }
+
+    .gallery img.animated-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .animated-text {
+        font-size: 1.2em; /* Texto menor em telas pequenas */
+    }
+}
